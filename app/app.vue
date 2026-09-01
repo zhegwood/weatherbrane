@@ -1,20 +1,16 @@
 <script setup lang="ts">
 import { onMounted } from "vue";
-import { useTimezoneStore } from "~/stores/timezone";
-import { useGeolocationStore } from "~/stores/geolocation";
 
-const { setTimezone } = useTimezoneStore();
-const { geoLocate } = useGeolocationStore();
+const isInitializing = useState("isInitializing", () => true);
+const { initialize } = useAppInitialization();
 
-onMounted(() => {
-  setTimezone();
-  geoLocate();
-});
+onMounted(initialize);
 </script>
 <template>
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
+  <GlobalOverlay v-if="isInitializing" />
 </template>
 <!-- Global on purpose -->
 <style lang="css">

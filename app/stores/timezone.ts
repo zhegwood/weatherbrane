@@ -4,7 +4,7 @@ import { ref } from "vue";
 export const useTimezoneStore = defineStore("timezone", () => {
   const timezone = ref<string>("");
 
-  const setTimezone = () => {
+  const setTimezone = async () => {
     const storedTimezone = localStorage.getItem("weatherbrane-timezone");
 
     if (storedTimezone) {
