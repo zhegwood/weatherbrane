@@ -25,14 +25,16 @@ export const useGeolocationStore = defineStore("geolocation", () => {
         location: { lat, lng },
       } = await response.json();
 
-      if (lat && lng) {
-        const geoData = {
-          lat,
-          lng,
-        };
-        geolocation.value = geoData;
-        localStorage.setItem("weatherbrane-geolocation", JSON.stringify(geoData));
+      if (!lat || !lng) {
+        throw new Error("Invalid geolocation data from API");
       }
+
+      const geoData = {
+        lat,
+        lng,
+      };
+      geolocation.value = geoData;
+      localStorage.setItem("weatherbrane-geolocation", JSON.stringify(geoData));
     } catch (error) {
       console.error("Geolocation fallback failed:", error);
     }
@@ -52,7 +54,10 @@ export const useGeolocationStore = defineStore("geolocation", () => {
         const { latitude, longitude } = position.coords;
         const geoData = { lat: latitude, lng: longitude };
         geolocation.value = geoData;
-        localStorage.setItem("weatherbrane-geolocation", JSON.stringify(geoData));
+        localStorage.setItem(
+          "weatherbrane-geolocation",
+          JSON.stringify(geoData),
+        );
       },
       (error) => {
         // User denied or error occurred, fall back to Google Maps Geolocation API
