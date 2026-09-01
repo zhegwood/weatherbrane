@@ -14,11 +14,11 @@ const setTimezone = () => {
   if (storedTimezone) {
     timezone.value = storedTimezone;
     return;
-  } else {
-    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    timezone.value = userTimezone;
-    localStorage.setItem("weatherbrane-timezone", userTimezone);
   }
+
+  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  timezone.value = userTimezone;
+  localStorage.setItem("weatherbrane-timezone", userTimezone);
 };
 
 const fallbackToGoogleMapsGeolocation = async () => {
@@ -43,7 +43,7 @@ const fallbackToGoogleMapsGeolocation = async () => {
     if (lat && lng) {
       const geoData = {
         lat,
-        lng: lng,
+        lng,
       };
       geolocation.value = geoData;
       localStorage.setItem("weatherbrane-geolocation", JSON.stringify(geoData));
