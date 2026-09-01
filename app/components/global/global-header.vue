@@ -1,5 +1,7 @@
 <script setup lang="ts">
-const timezone = useState("timezone");
+import { storeToRefs } from "pinia";
+import { useTimezoneStore } from "~/stores/timezone";
+const { timezone } = storeToRefs(useTimezoneStore());
 </script>
 <template>
   <nav
