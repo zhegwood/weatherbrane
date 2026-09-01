@@ -1,11 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useRuntimeConfig } from "#app";
-
-interface GeolocationData {
-  lat: number;
-  lng: number;
-}
+import type { GeolocationData } from "~/types/geolocation-data";
 
 export const useGeolocationStore = defineStore("geolocation", () => {
   const geolocation = ref<GeolocationData | null>(null);
