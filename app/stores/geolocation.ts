@@ -40,11 +40,13 @@ export const useGeolocationStore = defineStore("geolocation", () => {
     }
   };
 
-  const geoLocate = () => {
+  const geoLocate = () =>
+    new Promise<void>((resolve) => {
     const storedGeoLocation = localStorage.getItem("weatherbrane-geolocation");
 
     if (storedGeoLocation) {
       geolocation.value = JSON.parse(storedGeoLocation);
+      resolve();
       return;
     }
 
@@ -58,13 +60,14 @@ export const useGeolocationStore = defineStore("geolocation", () => {
           "weatherbrane-geolocation",
           JSON.stringify(geoData),
         );
+        resolve();
       },
-      (error) => {
+      () => {
         // User denied or error occurred, fall back to Google Maps Geolocation API
-        fallbackToGoogleMapsGeolocation();
+        fallbackToGoogleMapsGeolocation().then(resolve);
       },
     );
-  };
+  });
 
   return {
     geolocation,
