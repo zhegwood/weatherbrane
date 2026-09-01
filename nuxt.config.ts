@@ -1,3 +1,5 @@
+/// <reference types="node" />
+// https://nuxt.com/docs/api/configuration/nuxt-config
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
@@ -8,5 +10,10 @@ export default defineNuxtConfig({
   css: ["~/assets/css/main.css"], // Targets your main CSS file
   vite: {
     plugins: [tailwindcss()],
+  },
+  runtimeConfig: {
+    public: {
+      googleMapsApiKey: (process.env as any).GOOGLE_MAPS_API_KEY || "",
+    },
   },
 });
