@@ -6,11 +6,14 @@ import { useGeolocationStore } from "~/stores/geolocation";
 import { useForecastStore } from "~/stores/open-meteo/forecast";
 
 const { timezone } = storeToRefs(useTimezoneStore());
+
 const { geolocation } = storeToRefs(useGeolocationStore());
+
 const forecastStore = useForecastStore();
 const { fetchForecast } = useForecastStore();
 const { currentWeather, hourlyWeather, dailyWeather } =
   storeToRefs(forecastStore);
+
 const forecastPending = ref(false);
 const forecastError = ref<Error | null>(null);
 

@@ -17,8 +17,12 @@ export class CurrentWeatherForecast {
     fields.forEach((field, index) => {
       const value = block[field];
 
-      if (typeof value === "number") {
-        this[field] = roundValue(value);
+      if (!Array.isArray(value)) {
+        const roundedValue = roundValue(value);
+
+        if (roundedValue !== undefined) {
+          this[field] = roundedValue;
+        }
       }
     });
 
