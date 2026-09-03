@@ -40,34 +40,31 @@ export const useGeolocationStore = defineStore("geolocation", () => {
     }
   };
 
-  const geoLocate = () =>
-    new Promise<void>((resolve) => {
+  const getCurrentPosition = () =>
+    new Promise<GeolocationPosition>((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject);
+    });
+
+  const geoLocate = async () => {
     const storedGeoLocation = localStorage.getItem("weatherbrane-geolocation");
 
     if (storedGeoLocation) {
       geolocation.value = JSON.parse(storedGeoLocation);
-      resolve();
       return;
     }
 
-    // Try browser geolocation first
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        const geoData = { lat: latitude, lng: longitude };
-        geolocation.value = geoData;
-        localStorage.setItem(
-          "weatherbrane-geolocation",
-          JSON.stringify(geoData),
-        );
-        resolve();
-      },
-      () => {
-        // User denied or error occurred, fall back to Google Maps Geolocation API
-        fallbackToGoogleMapsGeolocation().then(resolve);
-      },
-    );
-  });
+    try {
+      const { coords } = await getCurrentPosition();
+      const geoData = { lat: coords.latitude, lng: coords.longitude };
+      geolocation.value = geoData;
+      localStorage.setItem(
+        "weatherbrane-geolocation",
+        JSON.stringify(geoData),
+      );
+    } catch {
+      await fallbackToGoogleMapsGeolocation();
+    }
+  };
 
   return {
     geolocation,
