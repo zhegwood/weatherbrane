@@ -1,4 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import CurrentWeather from "./current-weather.vue";
+import DailyWeather from "./daily-weather.vue";
+</script>
 <template>
-  <div>forecast</div>
+  <div class="flex flex-col ga-4">
+    <CurrentWeather />
+    <DailyWeather />
+  </div>
 </template>
