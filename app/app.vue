@@ -68,31 +68,3 @@ onBeforeUnmount(() => {
   </NuxtLayout>
   <GlobalOverlay v-if="isInitializing" />
 </template>
-<!-- Global on purpose -->
-<style lang="css">
-@reference "tailwindcss";
-
-html,
-body,
-#__nuxt,
-.app {
-  @apply h-full w-full;
-}
-.g-interactive {
-  @apply focus:outline-none focus:ring-offset-1 focus:ring-2 focus:ring-blue-500;
-}
-.h1 {
-  @apply text-3xl font-semibold leading-tight mb-4;
-}
-input[type="text"],
-input[type="password"] {
-  @apply py-1 px-4 border rounded;
-}
-button[type="button"] {
-  @apply py-1 px-4 border rounded hover:bg-gray-100 hover:cursor-pointer;
-}
-.sr-only {
-  @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
-  clip: rect(0, 0, 0, 0);
-}
-</style>

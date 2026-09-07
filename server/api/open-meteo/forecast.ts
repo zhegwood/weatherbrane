@@ -73,6 +73,8 @@ export default defineEventHandler(async (event: H3Event) => {
       query: params,
     });
 
+    console.log("response-------------------------", response);
+
     return {
       latitude: response.latitude,
       longitude: response.longitude,
@@ -82,7 +84,7 @@ export default defineEventHandler(async (event: H3Event) => {
       timezone: response.timezone,
       timezoneAbbreviation: response.timezone_abbreviation,
       current:
-        shouldFetchCurrent && response.current
+        (fetchAllSections || shouldFetchCurrent) && response.current
           ? new CurrentWeatherForecast(
               response.current,
               current.split(","),
@@ -90,7 +92,7 @@ export default defineEventHandler(async (event: H3Event) => {
             )
           : null,
       hourly:
-        shouldFetchHourly && response.hourly
+        (fetchAllSections || shouldFetchHourly) && response.hourly
           ? HourlyWeatherForecast.fromResponse(
               response.hourly,
               hourly.split(","),
@@ -98,7 +100,7 @@ export default defineEventHandler(async (event: H3Event) => {
             )
           : [],
       daily:
-        shouldFetchDaily && response.daily
+        (fetchAllSections || shouldFetchDaily) && response.daily
           ? DailyWeatherForecast.fromResponse(
               response.daily,
               daily.split(","),
