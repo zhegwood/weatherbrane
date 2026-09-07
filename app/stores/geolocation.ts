@@ -66,8 +66,25 @@ export const useGeolocationStore = defineStore("geolocation", () => {
     }
   };
 
+  const setGeolocation = (geoData: GeolocationData) => {
+    if (
+      !Number.isFinite(geoData.lat) ||
+      geoData.lat < -90 ||
+      geoData.lat > 90 ||
+      !Number.isFinite(geoData.lng) ||
+      geoData.lng < -180 ||
+      geoData.lng > 180
+    ) {
+      return;
+    }
+
+    geolocation.value = geoData;
+    localStorage.setItem("weatherbrane-geolocation", JSON.stringify(geoData));
+  };
+
   return {
     geolocation,
     geoLocate,
+    setGeolocation,
   };
 });
