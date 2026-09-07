@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { storeToRefs } from "pinia";
 import { useForecastStore } from "~/stores/open-meteo/forecast";
-import Forecast from "../components/forecast.vue";
+import Forecast from "~/components/forecast.vue";
 
 const forecastStore = useForecastStore();
 const { currentWeather, hourlyWeather, dailyWeather } =

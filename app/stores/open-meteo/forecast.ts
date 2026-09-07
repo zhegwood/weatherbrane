@@ -1,12 +1,7 @@
 import type { WeatherDataPoint } from "~/types/weather-data-point";
+import type { ForecastResponse } from "~/types/forecast-response";
 import { useGeolocationStore } from "~/stores/geolocation";
 import { useTimezoneStore } from "~/stores/timezone";
-
-type ForecastResponse = {
-  current: WeatherDataPoint | null;
-  hourly: WeatherDataPoint[] | null;
-  daily: WeatherDataPoint[] | null;
-};
 
 export const useForecastStore = defineStore("forecast", () => {
   const currentWeather = ref<WeatherDataPoint | null>(null);

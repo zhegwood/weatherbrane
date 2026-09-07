@@ -73,8 +73,6 @@ export default defineEventHandler(async (event: H3Event) => {
       query: params,
     });
 
-    console.log("response-------------------------", response);
-
     return {
       latitude: response.latitude,
       longitude: response.longitude,

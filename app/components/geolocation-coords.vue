@@ -2,8 +2,8 @@
 import { ref, watch } from "vue";
 import { useGeolocationStore } from "~/stores/geolocation";
 
-const { setGeolocation } = useGeolocationStore();
 const geolocationStore = useGeolocationStore();
+const { setGeolocation } = geolocationStore;
 const { geolocation } = storeToRefs(geolocationStore);
 
 const latitude = ref("");
