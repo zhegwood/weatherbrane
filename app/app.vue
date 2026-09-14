@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted } from "vue";
 import { useForecastStore } from "~/stores/open-meteo/forecast";
+import { useTimezoneStore } from "~/stores/timezone";
+
+const { timezone } = storeToRefs(useTimezoneStore());
 
 const { initialize } = useAppInitialization();
 const isInitializing = useState("isInitializing", () => true);
@@ -48,6 +51,10 @@ onMounted(async () => {
     },
     3 * 60 * 60 * 1000, //3 hours
   );
+});
+
+watch(timezone, async () => {
+  await fetchForecast();
 });
 
 onBeforeUnmount(() => {

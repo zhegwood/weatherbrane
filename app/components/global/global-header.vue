@@ -5,7 +5,7 @@ import { useGeolocationStore } from "~/stores/geolocation";
 
 const geolocationStore = useGeolocationStore();
 const { geolocation } = storeToRefs(geolocationStore);
-const { timezone } = storeToRefs(useTimezoneStore());
+const { timezone, timeZones } = storeToRefs(useTimezoneStore());
 </script>
 <template>
   <nav
@@ -15,7 +15,9 @@ const { timezone } = storeToRefs(useTimezoneStore());
     <div class="flex flex-row items-center gap-4">
       <div>links</div>
       <GeolocationCoords v-if="geolocation" />
-      {{ timezone }}
+      <select v-model="timezone" class="w-[200px]">
+        <option v-for="tz in timeZones" :key="tz" :value="tz">{{ tz }}</option>
+      </select>
     </div>
   </nav>
 </template>

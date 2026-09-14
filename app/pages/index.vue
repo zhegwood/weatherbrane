@@ -4,8 +4,7 @@ import { useForecastStore } from "~/stores/open-meteo/forecast";
 import Forecast from "~/components/forecast.vue";
 
 const forecastStore = useForecastStore();
-const { currentWeather, hourlyWeather, dailyWeather } =
-  storeToRefs(forecastStore);
+const { hourlyWeather, dailyWeather } = storeToRefs(forecastStore);
 </script>
 <template>
   <h1 class="h1">Forecast</h1>
