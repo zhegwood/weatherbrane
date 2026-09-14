@@ -13,8 +13,9 @@ body,
   @apply text-3xl font-semibold leading-tight mb-4;
 }
 input[type="text"],
-input[type="password"] {
-  @apply py-1 px-4 border rounded;
+input[type="password"],
+select {
+  @apply py-1 px-4 border rounded box-border;
 }
 button[type="button"] {
   @apply py-1 px-4 border rounded hover:bg-gray-100 hover:cursor-pointer;
